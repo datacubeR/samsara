@@ -1,0 +1,8 @@
+*.rar
+__pycache__
+ESTABLE_Arboreo_timeSeries
+INCENDIO_Arboreo_timeSeries
+SEQUIA_Arboreo_timeSeries
+TALA_Arboreo_timeSeries
+VARIOS_Arboreo_timeSeries
+*.parquet
