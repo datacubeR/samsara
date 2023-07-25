@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import pandas as pd
 from loguru import logger
 
@@ -11,27 +13,20 @@ PATHS = [
 OUTPUT_PATH = "data/ts_bosques.parquet"
 
 
-def import_data(file_path):
+def import_to_parquet(file_path):
+    # Extracción del nombre del Evento
     event = file_path.split("_")[0]
+    # Extraigo información del Path para exportar los datos.
+    stem = Path(file_path).stem
     logger.info(f"Importando datos de {event}...")
     df = pd.read_csv(file_path, index_col=0)
-    df["event"] = event
-    logger.info(f"{event}: {df.shape}")
-    return df
+    logger.info(f"{event}: {df.shape}, Exportando datos a Parquet...")
+    df.to_parquet(f"data/{stem}.parquet", index=False)
 
 
 if __name__ == "__main__":
     df_list = []
     for path in PATHS:
-        df_list.append(import_data(path))
+        import_to_parquet(path)
 
-    ## Concatena y ordena las columnas por fecha.
-    logger.info("Concatenando datos...")
-    df = pd.concat(df_list)
-    columns = df.columns.sort_values()
-    df = df[columns]
-
-    logger.info("Exportando Datos finales a Parquet...")
-    df.to_parquet(OUTPUT_PATH, index=False)
-
-    logger.info(f"Datos Correctamente exportados a Parquet a {OUTPUT_PATH}: {df.shape}")
+    logger.info("Proceso Terminado con Éxito.")
