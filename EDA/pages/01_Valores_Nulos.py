@@ -2,7 +2,12 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 import streamlit as st
-from pages.utils import index_to_week  # noqa
+from pages.utils import import_data, index_to_week
+
+if "EXCLUDE_COLUMNS" not in st.session_state:
+    st.session_state.EXCLUDE_COLUMNS = ["not_null", "not_null_perc"]
+if "df_dict" not in st.session_state:
+    st.session_state.df_dict = import_data()
 
 
 def create_heatmap_df(dict, ex_col, week=False):

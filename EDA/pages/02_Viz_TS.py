@@ -1,9 +1,15 @@
 import numpy as np
 import pandas as pd
 import streamlit as st
+from pages.utils import import_data
+
+if "EXCLUDE_COLUMNS" not in st.session_state:
+    st.session_state.EXCLUDE_COLUMNS = ["not_null", "not_null_perc"]
+if "df_dict" not in st.session_state:
+    st.session_state.df_dict = import_data()
+
 
 c1, c2 = st.columns(2)
-
 
 with c1:
     event = st.selectbox("Seleccionar Evento:", st.session_state.df_dict.keys())
