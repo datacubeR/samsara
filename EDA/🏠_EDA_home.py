@@ -3,6 +3,19 @@ import streamlit as st
 from pages.utils import import_data
 
 st.set_page_config(layout="wide")
+st.markdown(
+    """
+        <style>
+               .block-container {
+                    padding-top: 1rem;
+                    padding-bottom: 0rem;
+                    padding-left: 5rem;
+                    padding-right: 5rem;
+                }
+        </style>
+        """,
+    unsafe_allow_html=True,
+)
 st.markdown("# EDA Samsara")
 
 if "EXCLUDE_COLUMNS" not in st.session_state:
@@ -56,7 +69,12 @@ df = pd.DataFrame(
 with col1:
     plot0 = (
         df.loc["Filas"]
-        .plot(kind="bar", title="Número de Filas", color="green", edgecolor="black")
+        .plot(
+            kind="bar",
+            title="Número de Filas",
+            color="green",
+            edgecolor="black",
+        )
         .figure
     )
     st.pyplot(plot0, clear_figure=True)
