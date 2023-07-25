@@ -6,3 +6,4 @@ SEQUIA_Arboreo_timeSeries
 TALA_Arboreo_timeSeries
 VARIOS_Arboreo_timeSeries
 *.parquet
+.jukit
