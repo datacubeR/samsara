@@ -1,3 +1,10 @@
-from .utils import create_heatmap_df, import_data, index_to_week
+from .utils import (create_heatmap_df, create_histogram, import_data,
+                    summary_data)
 
-__all__ = ["import_data", "index_to_week", "create_heatmap_df"]
+__all__ = [
+    "import_data",
+    "index_to_week",
+    "create_heatmap_df",
+    "create_histogram",
+    "summary_data",
+]

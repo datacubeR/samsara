@@ -10,7 +10,7 @@ if "EXCLUDE_COLUMNS" not in st.session_state:
 if "df_dict" not in st.session_state:
     st.session_state.df_dict = import_data()
 
-
+st.markdown("# Valores Nulos por Resampleo")
 c1, c2 = st.columns(2)
 resample = c1.selectbox("Seleccionar Resample:", [None, "W", "2W", "M"])
 
@@ -58,15 +58,3 @@ fig = plt.figure(figsize=(20, 20))
 sns.heatmap(heatmap_df_resample)
 plt.title("Número de valores no nulos por Día")
 col3.pyplot(fig, clear_figure=True)
-
-
-#     fig = plt.figure(figsize=(20, 20))
-#     sns.heatmap(heatmap_df)
-#     plt.title("Número de valores no nulos por Día")
-#     st.pyplot(fig, clear_figure=True)
-#
-# with col2:
-#     fig = plt.figure(figsize=(20, 20))
-#     sns.heatmap(heatmap_df_week)
-#     plt.title("Número de valores no nulos por Semana")
-#     st.pyplot(fig, clear_figure=True)

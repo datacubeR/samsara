@@ -17,6 +17,7 @@ st.markdown(
         """,
     unsafe_allow_html=True,
 )
+st.markdown("# Comparador de Series de Tiempo")
 if "EXCLUDE_COLUMNS" not in st.session_state:
     st.session_state.EXCLUDE_COLUMNS = ["not_null", "not_null_perc"]
 if "df_dict" not in st.session_state:
