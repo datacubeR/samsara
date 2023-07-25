@@ -28,18 +28,88 @@ def import_data():
     return output
 
 
-def index_to_week(df):
+def create_heatmap_df(dict, ex_col, resample=None):
     """
+
     Parameters
     ----------
-    df : DataFrame al que se le quiere transformar los Índices de Fecha a Semana. Debe tener un índice con Fechas.
+    dict : Diccionario de DataFrames con los Datos de Series de Tiempo de cada Evento.
+
+    ex_col : Lista de Columnas que no son Fechas en la Serie de Tiempo.
+
+    resample : str, optional representa el resample a aplicar.
 
 
     Returns
     -------
+    output: Corresponde a la concatención de todos los eventos.
+    Está indexado por fecha (original o resampleada) y cada columna representa un evento.
 
-       Devuelve una Serie de Índices de Strings con formato "YYYY-WW" donde YYYY es el año y WW es la semana del año.
     """
-    calendar = pd.Series(df.index).astype("datetime64[ns]").dt.isocalendar()
-    new_index = calendar.year.astype(str) + "-" + calendar.week.astype(str)
-    return new_index
+    output_dict = {}
+
+    for name, data in dict.items():
+        if resample is not None:
+            data = data.drop(columns=ex_col).T
+            data.index = pd.to_datetime(data.index)
+            data = data.resample(resample).mean()
+        else:
+            data = data.drop(columns=ex_col).T
+        output_dict[name] = data.T.notnull().sum().astype(bool)
+        output_dict[name].name = name
+
+    output = pd.concat(output_dict.values(), axis=1).fillna(False).sort_index()
+    # output.index = pd.to_datetime(output.index)
+    return output
+
+
+def create_histogram(event, color):
+    plot = (
+        st.session_state.df_dict[event]["not_null_perc"]
+        .plot(
+            kind="hist",
+            title="Histograma de % de Valores No Nulos",
+            color=color,
+            edgecolor="black",
+            bins=100,
+        )
+        .figure
+    )
+    return st.pyplot(plot, clear_figure=True)
+
+
+def summary_data(evento):
+    container = st.container()
+    container.header(evento)
+    container.metric(
+        label="Dimensiones", value=f"{st.session_state.df_dict[evento].shape}"
+    )
+    container.metric(
+        label="Mediciones Promedio",
+        value=f"{st.session_state.df_dict[evento]['not_null'].mean():.0f}/{st.session_state.df_dict[evento]['not_null_perc'].mean():.0f}%",
+    )
+    container.metric(
+        label="Mínimo de Mediciones",
+        value=f"{st.session_state.df_dict[evento]['not_null'].min():.0f}/{st.session_state.df_dict[evento]['not_null_perc'].min():.0f}%",
+    )
+    container.metric(
+        label="Máximo de Mediciones",
+        value=f"{st.session_state.df_dict[evento]['not_null'].max():.0f}/{st.session_state.df_dict[evento]['not_null_perc'].max():.0f}%",
+    )
+    return container
+
+
+if __name__ == "__main__":
+    df_dict = import_data()
+    ex_col = ["not_null", "not_null_perc"]
+    output_dict = {}
+    for name, data in df_dict.items():
+        data = data.drop(columns=ex_col).T
+        print(data.index)
+        data.index = pd.to_datetime(data.index)
+        data = data.resample("W").mean()
+        print("Muestra de Datos:", data)
+        output_dict[name] = data.T.notnull().sum().astype(bool)
+        output_dict[name].name = name
+
+    output_dict
