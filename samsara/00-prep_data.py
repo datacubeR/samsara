@@ -29,4 +29,4 @@ if __name__ == "__main__":
     for path in PATHS:
         import_to_parquet(path)
 
-    logger.info("Proceso Terminado con Éxito.")
+    logger.success("Proceso Terminado con Éxito.")
