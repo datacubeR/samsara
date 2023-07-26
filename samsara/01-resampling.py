@@ -2,8 +2,7 @@ import argparse
 from pathlib import Path
 
 from loguru import logger
-
-from data import import_raw_data
+from utils import import_raw_data
 
 RESAMPLE_PATH = Path("data/resample/")
 RESAMPLE_PATH.mkdir(parents=True, exist_ok=True)

@@ -11,15 +11,19 @@ def import_data():
         Retorna un Diccionario con los Datasets de cada Evento.
     """
     output = dict(
-        ESTABLE=pd.read_parquet("data/ESTABLE_TimeSerie_ndvi.parquet").set_index(
+        ESTABLE=pd.read_parquet("data/raw/ESTABLE_TimeSerie_ndvi.parquet").set_index(
             "IDpix"
         ),
-        INCENDIO=pd.read_parquet("data/INCENDIO_TimeSerie_ndvi.parquet").set_index(
+        INCENDIO=pd.read_parquet("data/raw/INCENDIO_TimeSerie_ndvi.parquet").set_index(
             "IDpix"
         ),
-        SEQUIA=pd.read_parquet("data/SEQUIA_TimeSerie_ndvi.parquet").set_index("IDpix"),
-        TALA=pd.read_parquet("data/TALA_TimeSerie_ndvi.parquet").set_index("IDpix"),
-        VARIOS=pd.read_parquet("data/VARIOS_TimeSerie_ndvi.parquet").set_index("IDpix"),
+        SEQUIA=pd.read_parquet("data/raw/SEQUIA_TimeSerie_ndvi.parquet").set_index(
+            "IDpix"
+        ),
+        TALA=pd.read_parquet("data/raw/TALA_TimeSerie_ndvi.parquet").set_index("IDpix"),
+        VARIOS=pd.read_parquet("data/raw/VARIOS_TimeSerie_ndvi.parquet").set_index(
+            "IDpix"
+        ),
     )
 
     for name, data in output.items():
