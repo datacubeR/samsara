@@ -9,8 +9,24 @@ El siguiente repositorio contiene el código de todo el proceso de Tesis para el
 
 ## Funcionamiento
 
-Para llamar el Dashboard:
+- Para visualizar el Dashboard de EDA:
 
 ```bash
 make dashboard
+```
+
+- Para Resamplear e Interpolar los datos:
+
+```bash
+make resample r=<resample> i=<interpolate>
+```
+donde se pueden tomar los siguientes valores:
+
+> **resample**: ["W","2W","M"]  
+> **interpolate**: ["linear", "time", "ff", "bf"]
+
+- Para ejecutar los tests:
+
+```bash
+make tests
 ```

@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from samsara.data import create_sequences, create_sliding_matrix
+from samsara.utils import create_sequences, create_sliding_matrix
 
 dates = ["2011-01-31", "2011-02-28", "2011-03-31", "2011-04-30", "2011-05-31"]
 columns = ["TS-1", "TS-2", "TS-3", "TS-4", "TS-5"]
