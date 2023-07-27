@@ -8,12 +8,12 @@ RESAMPLE_PATH = Path("data/resample/")
 RESAMPLE_PATH.mkdir(parents=True, exist_ok=True)
 
 if __name__ == "__main__":
-    argparser = argparse.ArgumentParser()
-    argparser.add_argument("--resample", "-r", choices=["W", "2W", "M"], required=True)
-    argparser.add_argument(
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--resample", "-r", choices=["W", "2W", "M"], required=True)
+    parser.add_argument(
         "--interpolate", "-i", choices=["linear", "time", "ff", "bf"], required=True
     )
-    args = argparser.parse_args()
+    args = parser.parse_args()
 
     logger.info(
         f"Procesando Datos Resampling: {args.resample}, Interpolación: {args.interpolate}."
@@ -30,7 +30,7 @@ if __name__ == "__main__":
         output.to_parquet(
             RESAMPLE_PATH
             / f"resample_{event}_{args.resample}_{args.interpolate}.parquet",
-            index=False,
+            index=True,
         )
 
     logger.success("Datos Resampleados e Interpolados con éxito.")

@@ -8,3 +8,6 @@ tests:
 
 resampling:
 	python samsara/01-resampling.py -r $(r) -i $(i)
+
+split:
+	python samsara/02-split_data.py -r $(r) -i $(i)
