@@ -1,5 +1,10 @@
-from .utils import (create_heatmap_df, create_histogram, import_data,
-                    summary_data)
+from .utils import (
+    calculate_metrics,
+    create_heatmap_df,
+    create_histogram,
+    import_data,
+    summary_data,
+)
 
 __all__ = [
     "import_data",
@@ -7,4 +12,5 @@ __all__ = [
     "create_heatmap_df",
     "create_histogram",
     "summary_data",
+    "calculate_metrics",
 ]
