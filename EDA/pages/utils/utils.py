@@ -27,8 +27,11 @@ def import_data():
     )
 
     for name, data in output.items():
-        output[name]["not_null"] = data.notnull().sum(axis=1)
-        output[name]["not_null_perc"] = data.notnull().sum(axis=1) / data.shape[1] * 100
+        output[name] = data.assign(
+            not_null=data.notnull().sum(axis=1),
+            not_null_perc=data.notnull().sum(axis=1) / data.shape[1] * 100,
+        )
+
     return output
 
 
@@ -100,7 +103,22 @@ def summary_data(evento):
         label="Máximo de Mediciones",
         value=f"{st.session_state.df_dict[evento]['not_null'].max():.0f}/{st.session_state.df_dict[evento]['not_null_perc'].max():.0f}%",
     )
+    container.metric(
+        label="Fecha Mínima",
+        value=f"{st.session_state.df_dict[evento].drop(columns = ['not_null', 'not_null_perc']).columns.min()}",
+    )
+    container.metric(
+        label="Fecha Máxima",
+        value=f"{st.session_state.df_dict[evento].drop(columns = ['not_null', 'not_null_perc']).columns.max()}",
+    )
+
     return container
+
+
+def calculate_metrics(df):
+    not_null = df.Value.notnull().sum()
+    not_null_perc = not_null / len(df) * 100
+    return not_null, not_null_perc
 
 
 if __name__ == "__main__":

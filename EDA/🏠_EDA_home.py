@@ -34,7 +34,7 @@ with col1:
         df.loc["Filas"]
         .plot(
             kind="bar",
-            title="Número de Filas",
+            title="Número de TSs",
             color="green",
             edgecolor="black",
         )
@@ -46,7 +46,7 @@ with col2:
         df.loc["Columnas"]
         .plot(
             kind="bar",
-            title="Número de Columnas",
+            title="Número de Time Steps",
             color="red",
             edgecolor="black",
         )
@@ -62,3 +62,8 @@ for col, evento, color in zip(cols, st.session_state.df_dict.keys(), colors):
     with col:
         summary_data(evento)
         create_histogram(evento, color)
+
+st.markdown(
+    """> *Time Steps: Fecha con Medición.*  
+    *Medición: Time Step No Nulo.*"""
+)
