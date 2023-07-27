@@ -25,7 +25,7 @@ if "df_dict" not in st.session_state:
     st.session_state.df_dict = import_data()
 
 
-c1, c2, c3, c4 = st.columns(4)
+c1, c2, c3 = st.columns(3)
 
 with c1:
     event = st.selectbox("Seleccionar Evento:", st.session_state.df_dict.keys())
@@ -38,29 +38,28 @@ with c2:
         "% Mediciones Válidas", min_value=min_perc, max_value=max_perc
     )
 data = data.query("not_null_perc >= @perc_slider")
-ids = c3.selectbox(
-    "Seleccionar por ID: ",
-    data.index.unique(),
-)
-c4.metric(
+c3.metric(
     label="TSs Resultantes:",
     value=f"{data.index.nunique()}/{st.session_state.df_dict[event].shape[0]}",
 )
 
 
-col1, col2 = st.columns(2)
+col1, col2, col3 = st.columns(3)
+ids = col1.selectbox(
+    "Seleccionar por ID: ",
+    data.index.unique(),
+)
 data = st.session_state.df_dict[event].query("index == @ids")
-with col1:
+with col2:
     st.metric(
         label="Número de Mediciones Válidas",
         value=f"{data['not_null'].iat[0]}/{data.drop(columns = ['not_null', 'not_null_perc']).shape[1]}",
     )
-with col2:
+with col3:
     st.metric(
         label="Porcentaje de Mediciones Válidas",
         value=f"{data['not_null_perc'].iat[0]:.2f}%",
     )
-
 ts = data.drop(columns=st.session_state.EXCLUDE_COLUMNS).T
 ts.index = pd.to_datetime(ts.index)
 ts = ts.reset_index()
