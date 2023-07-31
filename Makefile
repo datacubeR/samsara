@@ -11,3 +11,6 @@ resampling:
 
 split:
 	python samsara/02-split_data.py -r $(r) -i $(i)
+
+train:
+	python samsara/03-train.py 

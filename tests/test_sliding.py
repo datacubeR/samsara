@@ -48,7 +48,9 @@ def test_create_sliding_matrix(n_rows, seq_len, expected):
 
 
 def test_create_sequences():
-    sequences, slide_dates, ts_indices = create_sequences(data, seq_len=3)
+    sequences, slide_dates, ts_indices, forecast_values = create_sequences(
+        data, seq_len=3
+    )
     expected_seqs = np.array(
         [
             [1, 4, 2],
@@ -107,6 +109,11 @@ def test_create_sequences():
             "TS-5",
         ]
     )
+
+    expected_forecast_values = np.array(
+        [1, 1, 3, 4, 6, 3, 0, 6, 3, 8, np.nan, np.nan, np.nan, np.nan, np.nan],
+    )
     assert np.array_equal(sequences, expected_seqs)
     assert np.array_equal(slide_dates, expected_dates)
     assert np.array_equal(ts_indices, expected_ts_indices)
+    assert np.array_equal(forecast_values, expected_forecast_values, equal_nan=True)

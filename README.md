@@ -25,6 +25,17 @@ donde se pueden tomar los siguientes valores:
 > **resample**: ["W","2W","M"]  
 > **interpolate**: ["linear", "time", "ff", "bf"]
 
+- Para definir qué Series de Tiempo corresponden a cada Split se utiliza:
+
+```bash
+make split r=<resample> i=<interpolate>
+```
+TODO: Falta corregir este comando cuando se tenga la definición completa. 
+
+```bash
+make split r=<resample> i=<interpolate>
+```
+
 - Para ejecutar los tests:
 
 ```bash
