@@ -24,25 +24,23 @@ def train_test_sequences(event, resample, interpolation, seq_len):
     logger.info(f"Creando Secuencias para {event}...")
     train_data = {}
     (
-        train_data["train_sequences"],
-        train_data["train_slide_dates"],
-        train_data["train_ts_indices"],
-        train_data["train_forecast_values"],
+        train_data["sequences"],
+        train_data["slide_dates"],
+        train_data["ts_indices"],
+        train_data["forecast_values"],
     ) = create_sequences(df_train, seq_len=seq_len)
 
     test_data = {}
     (
-        test_data["test_sequences"],
-        test_data["test_slide_dates"],
-        test_data["test_ts_indices"],
-        test_data["test_forecast_values"],
+        test_data["sequences"],
+        test_data["slide_dates"],
+        test_data["ts_indices"],
+        test_data["forecast_values"],
     ) = create_sequences(df_test, seq_len=seq_len)
 
     logger.success(
-        f"Train {event} creado Exitosamente: {train_data['train_sequences'].shape}"
+        f"Train {event} creado Exitosamente: {train_data['sequences'].shape}"
     )
-    logger.success(
-        f"Test {event} creado Exitosamente: {test_data['test_sequences'].shape}"
-    )
+    logger.success(f"Test {event} creado Exitosamente: {test_data['sequences'].shape}")
 
     return train_data, test_data
