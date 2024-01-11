@@ -5,7 +5,7 @@ El siguiente repositorio contiene el código de todo el proceso de Tesis para el
 ## Estructura del repositorio
 
 * samsara: Contiene todos los códigos asociados al proceso de Modelamiento de los Datos.
-* EDA: Contiene un Dashboard interactivo con todo lo relacionado a la Exploración de los Datos. 
+* EDA: Contiene un Dashboard interactivo con todo una exploración de datos inicial para entender cómo venía la data inicialmente y cuál es el efecto de los preprocesamientos.
 
 ## Funcionamiento
 
@@ -14,17 +14,6 @@ El siguiente repositorio contiene el código de todo el proceso de Tesis para el
 ```bash
 make dashboard
 ```
-
-- Para Resamplear e Interpolar los datos:
-
-```bash
-make resample r=<resample> i=<interpolate>
-```
-donde se pueden tomar los siguientes valores:
-
-> **resample**: ["W","2W","M"]  
-> **interpolate**: ["linear", "time", "ff", "bf"]
-
 - Para ejecutar los tests:
 
 ```bash

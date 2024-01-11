@@ -1,3 +1,6 @@
+"""This file is intended to transform original CSV files
+into Parquet to improve import performance
+"""
 from pathlib import Path
 
 import pandas as pd

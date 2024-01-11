@@ -8,3 +8,7 @@ VARIOS_Arboreo_timeSeries
 *.parquet
 .jukit
 *.npy
+LEEME_*
+checkpoints
+lightning_logs
+data
