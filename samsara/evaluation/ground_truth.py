@@ -19,5 +19,5 @@ def fix_dates(df, col="Finicio", date="19/082006", fix="19/08/2006"):
 
 def convert_dates(df):
     df["Finicio"] = pd.to_datetime(df["Finicio"], dayfirst=True)
-    df["Fultima"] = pd.to_datetime(df["Fultima"], dayfirst=True)
+    df["Ffinal"] = pd.to_datetime(df["Ffinal"], dayfirst=True)
     return df
